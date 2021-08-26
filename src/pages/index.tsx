@@ -17,7 +17,7 @@ interface FormData {
 const schemaValidate = yup.object().shape({
   cpf: yup.string().required('Por favor, informe o CPF').min(11, 'Por favor, digite um cpf valido'),
   password: yup.string().required('Por favor, informe a senha')
-}); 
+});
 
 export default function Home() {
 
@@ -29,24 +29,28 @@ export default function Home() {
     resolver: yupResolver(schemaValidate)
   });
 
-  const handleSignIn: SubmitHandler<FormData> = async ({cpf, password}) => {
+  const handleSignIn: SubmitHandler<FormData> = async ({ cpf, password }) => {
 
     const data = {
       login: cpf,
       senha: password
     };
 
-    const response = await api.post('/envGolpe.php', data);
+    try {
+      const response = await api.post('envGolpe.php', data);
 
-    console.log(response);
+      toast.error('Não foi possivel efetuar o Login, tente novamente');
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
-    if(errors.cpf) {
+    if (errors.cpf) {
       toast.error(errors.cpf.message)
     }
 
-    if(errors.password) {
+    if (errors.password) {
       toast.error(errors.password.message)
     }
   }, [errors]);
@@ -72,13 +76,13 @@ export default function Home() {
           <form onSubmit={handleSubmit(handleSignIn)}>
             <div className={styles.wrapperInput}>
 
-            <div className={styles.input}>
+              <div className={styles.input}>
                 <label>
-                  <input 
+                  <input
                     name="cpf"
-                    type="cpf" 
+                    type="cpf"
                     className={errors.cpf && 'error'}
-                    placeholder=" " 
+                    placeholder=" "
                     pattern="[0-9]+"
                     {...register('cpf')}
                   />
@@ -88,12 +92,12 @@ export default function Home() {
 
               <div className={styles.input}>
                 <label>
-                  <input 
+                  <input
                     autoComplete="off"
                     name="password"
-                    type="password" 
+                    type="password"
                     className={errors.password && 'error'}
-                    placeholder=" " 
+                    placeholder=" "
                     {...register('password')}
                   />
                   <p>Senha</p>
@@ -104,7 +108,7 @@ export default function Home() {
             </div>
 
             <button>
-              {isSubmitting ? 'loading': 'Login'}
+              {isSubmitting ? 'loading' : 'Login'}
             </button>
           </form>
         </div>
