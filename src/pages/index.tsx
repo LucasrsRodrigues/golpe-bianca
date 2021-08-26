@@ -1,13 +1,54 @@
-import  Head from 'next/head';
+import Head from 'next/head';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import styles from '../styles/pages/Login.module.scss';
+import { useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+interface FormData {
+  cpf: string;
+  password: string;
+}
+
+const schemaValidate = yup.object().shape({
+  cpf: yup.string().required('Por favor, informe o CPF').min(11, 'Por favor, digite um cpf valido'),
+  password: yup.string().required('Por favor, informe a senha')
+}); 
 
 export default function Home() {
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting }
+  } = useForm({
+    resolver: yupResolver(schemaValidate)
+  });
+
+  const handleSignIn: SubmitHandler<FormData> = ({cpf, password}) => {
+    console.log({ cpf, password });
+  }
+
+  useEffect(() => {
+    if(errors.cpf) {
+      toast.error(errors.cpf.message)
+    }
+
+    if(errors.password) {
+      toast.error(errors.password.message)
+    }
+  }, [errors]);
+
   return (
     <div className={styles.container}>
       <Head>
         <title>GrBank | Login</title>
       </Head>
       <main>
+        <ToastContainer />
         <div className={styles.wrapperForm}>
           <div className={styles.logo}>
 
@@ -18,21 +59,48 @@ export default function Home() {
               Bank
             </h2>
           </div>
-          <form action="">
-            <div className="wrapper-input">
-              <input type="text" placeholder="CPF" />
-              <input type="password" placeholder="Senha" />
+
+          <form onSubmit={handleSubmit(handleSignIn)}>
+            <div className={styles.wrapperInput}>
+
+            <div className={styles.input}>
+                <label>
+                  <input 
+                    name="cpf"
+                    type="cpf" 
+                    className={errors.cpf && 'error'}
+                    placeholder=" " 
+                    {...register('cpf')}
+                  />
+                  <p>CPF</p>
+                </label>
+              </div>
+
+              <div className={styles.input}>
+                <label>
+                  <input 
+                    autoComplete="off"
+                    name="password"
+                    type="password" 
+                    className={errors.password && 'error'}
+                    placeholder=" " 
+                    {...register('password')}
+                  />
+                  <p>Senha</p>
+                </label>
+              </div>
+
               <a href="#">Esqueci minha senha</a>
             </div>
 
             <button>
-              Login
+              {isSubmitting ? 'loading': 'Login'}
             </button>
           </form>
         </div>
 
         <footer>
-          ©GR Bank - o golpe tá ai
+          ©GR Bank - Todos os direitos o golpe tá ai reservados.
         </footer>
       </main>
     </div>
