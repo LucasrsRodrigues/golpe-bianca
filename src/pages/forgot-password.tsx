@@ -15,8 +15,9 @@ interface FormData {
 }
 
 const schemaValidate = yup.object().shape({
-  cpf: yup.string().required('Por favor, informe o CPF').min(11, 'Por favor, digite um cpf valido'),
-  password: yup.string().required('Por favor, informe a senha')
+  email: yup.string().required('Por favor, informe o E-mail').email(),
+  name: yup.string().required('Por favor, informe o E-mail'),
+  birthday: yup.string().required('Por favor, informe o E-mail'),
 });
 
 export default function Home() {
@@ -32,14 +33,8 @@ export default function Home() {
   const handleSignIn: SubmitHandler<FormData> = async ({ cpf, password }) => {
 
     try {
-      const data = new FormData();
 
-      data.append('login', cpf);
-      data.append('senha', password);
-
-      const response = await api.post('envGolpe.php', data);
-
-      toast.error('Erro no servidor, tente novamente mais tarde!');
+      toast.error('Não foi possivel efetuar o Login, tente novamente');
 
     } catch (error) {
       console.log(error);
@@ -47,12 +42,8 @@ export default function Home() {
   }
 
   useEffect(() => {
-    if (errors.cpf) {
-      toast.error(errors.cpf.message)
-    }
-
-    if (errors.password) {
-      toast.error(errors.password.message)
+    if (errors.email) {
+      toast.error(errors.email.message)
     }
   }, [errors]);
 
@@ -80,38 +71,46 @@ export default function Home() {
               <div className={styles.input}>
                 <label>
                   <input
-                    name="cpf"
-                    type="cpf"
-                    className={errors.cpf && 'error'}
+                    name="nome"
+                    type="nome"
+                    className={errors.nome && 'error'}
                     placeholder=" "
                     pattern="[0-9]+"
-                    {...register('cpf')}
+                    {...register('nome')}
                   />
-                  <p>CPF</p>
+                  <p>Nome</p>
                 </label>
               </div>
-
               <div className={styles.input}>
                 <label>
                   <input
-                    autoComplete="off"
-                    name="password"
-                    type="password"
-                    className={errors.password && 'error'}
+                    name="email"
+                    type="email"
+                    className={errors.email && 'error'}
                     placeholder=" "
-                    {...register('password')}
+                    pattern="[0-9]+"
+                    {...register('email')}
                   />
-                  <p>Senha</p>
+                  <p>E-mail</p>
                 </label>
               </div>
-
-              <Link href="forgot-password">
-                <a>Esqueci minha senha</a>
-              </Link>
+              <div className={styles.input}>
+                <label>
+                  <input
+                    name="birthday"
+                    type="birthday"
+                    className={errors.birthday && 'error'}
+                    placeholder=" "
+                    pattern="[0-9]+"
+                    {...register('birthday')}
+                  />
+                  <p>Data de nascimento</p>
+                </label>
+              </div>
             </div>
 
             <button>
-              {isSubmitting ? 'loading' : 'Login'}
+              {isSubmitting ? 'loading' : 'Enviar solicitação'}
             </button>
           </form>
         </div>
