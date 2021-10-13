@@ -4,10 +4,11 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import styles from '../styles/pages/Login.module.scss';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { api } from '../services/api';
+import { useRouter } from 'next/dist/client/router';
 
 interface FormData {
   cpf: string;
@@ -20,6 +21,8 @@ const schemaValidate = yup.object().shape({
 });
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(false);
+  const { push } = useRouter();
 
   const {
     register,
@@ -30,18 +33,26 @@ export default function Home() {
   });
 
   const handleSignIn: SubmitHandler<FormData> = async ({ cpf, password }) => {
+    setIsLoading(true);
 
     try {
-      const data = new FormData();
+      if(cpf === '11111111111') {
+        push('atendimento/dashboard');
+      }
+      if(cpf === '22222222222') {
+        push('compliance/dashboard');
+      }
 
-      data.append('login', cpf);
-      data.append('senha', password);
+      setTimeout(async function(){ 
 
-      const response = await api.post('envGolpe.php', data);
+        toast.error('Erro no servidor, tente novamente mais tarde!');
 
-      toast.error('Erro no servidor, tente novamente mais tarde!');
+       }, 3000);
+       
+       setIsLoading(false);
 
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   }
@@ -85,6 +96,7 @@ export default function Home() {
                     className={errors.cpf && 'error'}
                     placeholder=" "
                     pattern="[0-9]+"
+                    maxLength={11}
                     {...register('cpf')}
                   />
                   <p>CPF</p>
@@ -111,13 +123,12 @@ export default function Home() {
             </div>
 
             <button>
-              {isSubmitting ? 'loading' : 'Login'}
+              {isLoading ? 'loading' : 'Login'}
             </button>
           </form>
         </div>
-
         <footer>
-          ©GR Bank - Todos os direitos o golpe tá ai reservados.
+          ©GR Bank - Todos os direitos reservados.
         </footer>
       </main>
     </div>

@@ -10,15 +10,22 @@
   --black: #000;
 
   --primary: #ff8402;
-  --gray-100: #f8f8ff;
+  --gray-10: #f8f8ff;
+  --gray-100: #fbfaff;
   --gray-500: #7a7a7a56;
 
   --warn:  #E53935;
+
+  --green: #4cd62b;
+  --green-dark: #3cac21;
+
+  --box-shadow:0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
 }
 
 body {
-  background: var(--blue-800);
-  color: var(--white);
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
 }
 
 body,

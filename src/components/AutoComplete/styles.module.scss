@@ -1,0 +1,74 @@
+.container {
+  width: 100%;
+  max-width: 900px;
+
+
+  .noSuggestions {
+    color: #999;
+    padding: 0.5rem;
+  }
+
+  .suggestions {
+    list-style: none;
+    margin-top: 0;
+    max-height: 143px;
+    // overflow-y: auto;
+    padding-left: 0;
+    margin-top: 15px;
+  }
+
+  .suggestions li {
+    padding: 0.5rem;
+    background: var(--white);
+    border-radius: 9px;
+    padding: 15px;
+    display: flex;
+
+    span {
+
+    }
+    
+    p {
+      margin-left: 15px;
+
+      &.userCpf{
+        margin-left: auto;
+      }
+    }
+    & + li {
+      margin-top: 5px;
+    }
+  }
+
+  .suggestionActive,
+  .suggestions li:hover {
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .inputWrapper {
+    display: flex;
+    align-items: center;
+
+    margin-top: 30px;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+
+    svg {
+      margin-left: 15px;
+      color: var(--primary)
+    }
+
+    input {
+      flex: 1;
+      padding: 15px;
+      border: none;
+      background: transparent;
+
+      &::placeholder {
+        font-style: italic;
+      }
+    }
+  }
+}
