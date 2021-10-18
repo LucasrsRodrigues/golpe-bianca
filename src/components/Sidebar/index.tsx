@@ -2,11 +2,11 @@ import styles from './styles.module.scss';
 import { useEffect, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { BiGridAlt, BiLogOut, BiMenuAltRight, BiUser } from 'react-icons/bi';
-import { useMenu } from '../../hooks/Menu';
 import Link from 'next/link';
 import { useRouter } from 'next/dist/client/router';
-import { getPathRoute } from '../../utils';
 import Head from 'next/head';
+import { useMenu } from '../../hooks/Menu';
+import { getPathRoute } from '../../utils';
 
 export default function Sidebar() {
   const { changeVisibilty, isOpenMenu } = useMenu();

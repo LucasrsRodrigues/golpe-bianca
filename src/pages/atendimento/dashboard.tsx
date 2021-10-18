@@ -1,6 +1,6 @@
-import { GlobalWrapper } from '../../components/GlobalWrapper';
 
-import styles from '../../../styles/pages/atendimento/Dashboard.module.scss';
+import styles from '../../../styles/pages/Dashboard.module.scss';
+import { GlobalWrapper } from '../../components/GlobalWrapper';
 
 export default function Dashboard() {
   return (

@@ -3,12 +3,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
-import styles from '../styles/pages/Login.module.scss';
 import { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { api } from '../services/api';
 import { useRouter } from 'next/dist/client/router';
+import styles from '../styles/pages/Login.module.scss';
 
 interface FormData {
   cpf: string;

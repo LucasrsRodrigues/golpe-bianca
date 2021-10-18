@@ -1,5 +1,8 @@
 import { ReactNode } from "react";
 import { useMenu } from "../../hooks/Menu";
+import { Header } from "../Header";
+
+
 import Sidebar from "../Sidebar";
 
 type GlobalWrapper = {
@@ -14,6 +17,7 @@ export function GlobalWrapper({ children }: GlobalWrapper){
   return(
     <>
       <Sidebar />
+      <Header />
       <section className={`${styles.container} ${isOpenMenu && styles.open}`}>
         {children}
       </section>

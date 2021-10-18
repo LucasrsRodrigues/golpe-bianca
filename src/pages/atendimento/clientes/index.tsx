@@ -3,13 +3,12 @@ import { BiSearch } from "react-icons/bi";
 import { AutoCompleteInput } from "../../../components/AutoComplete";
 import { GlobalWrapper } from "../../../components/GlobalWrapper";
 
-import styles from '../../../styles/pages/complice/ListClientes.module.scss';
-import { users } from "../../../utils/data";
+// import styles from '../../../../styles/v1/pages/atendimento/ListClientes.module.scss';
 
 export default function Clientes({ suggestions }) {
   return (
     <GlobalWrapper>
-      <section className={styles.clienteContainer}>
+      <section >
         <h1>Clientes</h1>
 
         <form action="/">

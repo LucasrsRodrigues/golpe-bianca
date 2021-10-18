@@ -1,0 +1,69 @@
+.containerHeader {
+  min-height: 75px;
+  background: var(--primary);
+  border-bottom: 1px solid var(--primary-light);
+  display: flex;
+  padding: 0 20px;
+  align-items: center;
+  
+  .icons {
+    margin-left: auto;
+    display: flex;
+
+
+    .icon {
+      background: #ff8402;
+      box-shadow: 0px 2px 3px #ce6a00;
+
+      margin: 5px;
+      padding: 11px !important;
+      text-align: center;
+      height: 2.5rem;
+      width: 2.5rem;
+      font-size: 1.2rem;
+      position: relative;
+      border-radius: 50%;
+
+      a {
+        svg {
+          color: var(--white);
+          font-size: 20px;
+        }
+
+        span {
+          display: block;
+          position: absolute;
+
+
+          top: 7px;
+          right: 8px;
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+
+          &.pulse {
+            background: #22c03c;
+          }
+
+          &.pulseDanger {
+            background: #ee335e;
+
+            // &:before {
+            //   content: '';
+            //   top: -4px;
+            //   right: -4px;
+            //   width: 15px;
+            //   height: 15px;
+            //   position: absolute;
+            //   border-radius: 50%;
+            //   background: rgba(238, 51, 94, 0.8);
+            //   cursor: pointer;
+            //   box-shadow: 0 0 0 rgb(238 51 94 / 90%);
+            //   animation: pulse 2s infinite;
+            // }
+          }
+        }
+      }
+    }
+  }
+}
