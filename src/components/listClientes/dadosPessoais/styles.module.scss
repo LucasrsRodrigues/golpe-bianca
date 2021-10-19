@@ -1,27 +1,3 @@
-.container {
-  display: grid;
-  // grid-template-columns: repeat(2, 1fr);
-  grid-template-columns: repeat(auto-fit, minmax(800px, 1fr));
-  grid-gap: 30px;
-}
-
-.pageHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  min-height: 50px;
-
-  div {
-    h1 {
-      margin: 0;
-      font-size: 20px;
-      font-weight: 600;
-      position: relative;
-      margin-bottom: 0.2rem;
-    }
-  }
-}
 
 .wrapperCards {
   background-color: #FFF;
@@ -89,10 +65,11 @@
             border-radius: 7px;
             transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
             
-            background: #FAFAFA;
 
             &:disabled{
               cursor: not-allowed;
+              background: #FAFAFA;
+
             }
           }
 
@@ -134,9 +111,17 @@
   border-radius: 5px;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, filter 0.2s;
 
-  &:hover {
+  &:hover:not(:disabled) {
     filter: brightness(0.9);
   }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+
+
+  
 }
 
 .editButton {
@@ -147,6 +132,7 @@
   padding: 10px;
   border-radius: 10px;
   transition: background .2s;
+
   svg {
     margin-right: 5px;
   }
@@ -156,43 +142,20 @@
   }
 }
 
-.wrapperTable {
-  display: block;
-  width: 100%;
-  overflow-x: auto;
+.cancelEdit {
+  display: flex;
+  align-items: center;
+  border: 0;
+  background: #ec7471;
+  padding: 10px;
+  border-radius: 10px;
+  transition: background .2s;
 
-  table {
-    white-space: nowrap;
-    border: 1px solid #eaedf1;
-    padding: 0.75rem;
-    vertical-align: top;
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 1rem;
+  svg {
+    margin-right: 5px;
+  }
 
-    thead {
-      vertical-align: bottom;
-
-      tr {
-        border-color: inherit;
-        border-style: solid;
-        border-width: 0;
-
-        th {
-          vertical-align: bottom;
-          border-bottom: 1px solid #eaedf1;
-          border-bottom-width: 1px;
-          border-top: 0;
-          padding: 0.75rem;
-          color: #2e3138;
-          text-transform: uppercase;
-          font-size: 0.875rem; 
-        }
-      }
-    }
-
-    & > :not(:last-child)> :last-child>* {
-        border-bottom-color: #eaedf1;
-    }
+  &:hover {
+    background: #E53935;
   }
 }

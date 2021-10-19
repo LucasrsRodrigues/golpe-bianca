@@ -1,4 +1,9 @@
+
+
 .containerHeader {
+  position: fixed;
+  width: 100%;
+  z-index: 2;
   min-height: 75px;
   background: var(--primary);
   border-bottom: 1px solid var(--primary-light);
