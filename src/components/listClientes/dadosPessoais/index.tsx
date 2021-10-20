@@ -129,7 +129,7 @@ function DadosPessoais({ dados_pessoais }: DadosPessoaisProps) {
                 </div>
                 <div className={styles.option}>
                   <strong>Criticidade:</strong>
-                  {dados_pessoais.informacoes_seguranca.criticidade}
+                  {dados_pessoais.informacoes_seguranca.criticidade === null ? '---' : dados_pessoais.informacoes_seguranca.criticidade}
                 </div>
               </div>
             </div>
